@@ -9,11 +9,11 @@ using ProjectManagement.Infrastructure.Data;
 
 #nullable disable
 
-namespace ProjectManagement.Api.Migrations
+namespace ProjectManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250828070024_UpdatedPositionToInt")]
-    partial class UpdatedPositionToInt
+    [Migration("20250901113816_CompleteDatabase")]
+    partial class CompleteDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,21 @@ namespace ProjectManagement.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AssigneeProjectTask", b =>
+                {
+                    b.Property<Guid>("AssigneesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TasksId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("AssigneesId", "TasksId");
+
+                    b.HasIndex("TasksId");
+
+                    b.ToTable("AssigneeProjectTask");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -239,7 +254,139 @@ namespace ProjectManagement.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProjectManagement.Features.Workspaces.Domain.Workspace", b =>
+            modelBuilder.Entity("ProjectManagement.Domain.Assignee", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AvatarUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Assignees");
+                });
+
+            modelBuilder.Entity("ProjectManagement.Domain.Column", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("WorkspaceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("Columns");
+                });
+
+            modelBuilder.Entity("ProjectManagement.Domain.ProjectTask", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ColumnId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("WorkspaceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ColumnId");
+
+                    b.HasIndex("WorkspaceId");
+
+                    b.ToTable("Tasks");
+                });
+
+            modelBuilder.Entity("ProjectManagement.Domain.Tag", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("ProjectManagement.Domain.Workspace", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -273,33 +420,34 @@ namespace ProjectManagement.Api.Migrations
                     b.ToTable("Workspaces");
                 });
 
-            modelBuilder.Entity("ProjectManagement.SingleProject.Features.Columns.Domain.Column", b =>
+            modelBuilder.Entity("ProjectTaskTag", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("TagsId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("WorkspaceId")
+                    b.Property<Guid>("TasksId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("TagsId", "TasksId");
 
-                    b.HasIndex("WorkspaceId");
+                    b.HasIndex("TasksId");
 
-                    b.ToTable("Columns");
+                    b.ToTable("ProjectTaskTag");
+                });
+
+            modelBuilder.Entity("AssigneeProjectTask", b =>
+                {
+                    b.HasOne("ProjectManagement.Domain.Assignee", null)
+                        .WithMany()
+                        .HasForeignKey("AssigneesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManagement.Domain.ProjectTask", null)
+                        .WithMany()
+                        .HasForeignKey("TasksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -353,15 +501,49 @@ namespace ProjectManagement.Api.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProjectManagement.SingleProject.Features.Columns.Domain.Column", b =>
+            modelBuilder.Entity("ProjectManagement.Domain.Column", b =>
                 {
-                    b.HasOne("ProjectManagement.Features.Workspaces.Domain.Workspace", "Workspace")
+                    b.HasOne("ProjectManagement.Domain.Workspace", "Workspace")
                         .WithMany()
                         .HasForeignKey("WorkspaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("ProjectManagement.Domain.ProjectTask", b =>
+                {
+                    b.HasOne("ProjectManagement.Domain.Column", "Column")
+                        .WithMany()
+                        .HasForeignKey("ColumnId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManagement.Domain.Workspace", "Workspace")
+                        .WithMany()
+                        .HasForeignKey("WorkspaceId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Column");
+
+                    b.Navigation("Workspace");
+                });
+
+            modelBuilder.Entity("ProjectTaskTag", b =>
+                {
+                    b.HasOne("ProjectManagement.Domain.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectManagement.Domain.ProjectTask", null)
+                        .WithMany()
+                        .HasForeignKey("TasksId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

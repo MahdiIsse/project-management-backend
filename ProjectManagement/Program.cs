@@ -16,14 +16,27 @@ using ProjectManagement.Application.Services;
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
-    .WriteTo.File("logs/projectmanagement-.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddApplicationInsightsTelemetry();
+
 builder.Host.UseSerilog();
 
 builder.Services.AddControllers();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+              .AllowAnyMethod()
+              .AllowAnyHeader()
+              .AllowCredentials();
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
@@ -104,9 +117,9 @@ builder.Services.AddSwaggerGen(c =>
        c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
 
        c.AddSecurityRequirement(new OpenApiSecurityRequirement
-       {
-                { jwtSecurityScheme, Array.Empty<string>() }
-       });
+          {
+                   { jwtSecurityScheme, Array.Empty<string>() }
+          });
    });
 
 builder.Services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
@@ -124,22 +137,41 @@ builder.Services.AddScoped<IOnboardingService, OnboardingService>();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+
+if (app.Environment.IsProduction())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        try
+        {
+            db.Database.Migrate();
+            Log.Information("Database migration completed successfully");
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Database migration failed - application will continue without migration");
+        }
+    }
 }
 
-app.UseHttpsRedirection();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseHttpsRedirection();
 app.UseAuthentication();
+
+app.UseCors("AllowFrontend");
+
 app.UseAuthorization();
+
 app.MapControllers();
 
-app.Run();
+app.MapGet("/health", () => "API is running - " + DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss"));
 
+app.Run();
 
 Log.CloseAndFlush();
 
