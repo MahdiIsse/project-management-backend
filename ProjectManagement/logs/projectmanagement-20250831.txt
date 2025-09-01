@@ -1,0 +1,106 @@
+2025-08-31 10:49:35.378 +02:00 [INF] User profile is available. Using '/Users/mahdiisse/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-08-31 10:49:35.440 +02:00 [INF] Now listening on: http://localhost:5241
+2025-08-31 10:49:35.442 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-31 10:49:35.443 +02:00 [INF] Hosting environment: Development
+2025-08-31 10:49:35.443 +02:00 [INF] Content root path: /Users/mahdiisse/project-management-backend/ProjectManagement.Api
+2025-08-31 10:49:40.171 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5241/ - null null
+2025-08-31 10:49:40.205 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-08-31 10:49:40.238 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5241/ - 404 0 null 67.7832ms
+2025-08-31 10:49:40.246 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5241/, Response status code: 404
+2025-08-31 10:49:44.082 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5241/swagger/ - null null
+2025-08-31 10:49:44.085 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5241/swagger/ - 301 0 null 2.5342ms
+2025-08-31 10:49:44.280 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5241/swagger/v1/swagger.json - null null
+2025-08-31 10:49:44.364 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 83.2861ms
+2025-08-31 10:50:04.214 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5241/api/Auth/login - application/json 59
+2025-08-31 10:50:04.220 +02:00 [INF] Executing endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:04.243 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ProjectManagement.Api.Features.Auth.DTO.LoginRequestDto) on controller ProjectManagement.Api.Features.Auth.AuthController (ProjectManagement.Api).
+2025-08-31 10:50:05.007 +02:00 [INF] Executed DbCommand (36ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-08-31 10:50:05.087 +02:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-08-31 10:50:05.089 +02:00 [INF] Executed action ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api) in 844.2907ms
+2025-08-31 10:50:05.089 +02:00 [INF] Executed endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:05.092 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5241/api/Auth/login - 401 null text/plain; charset=utf-8 878.5936ms
+2025-08-31 10:50:20.150 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5241/api/Auth/login - application/json 65
+2025-08-31 10:50:20.153 +02:00 [INF] Executing endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:20.153 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ProjectManagement.Api.Features.Auth.DTO.LoginRequestDto) on controller ProjectManagement.Api.Features.Auth.AuthController (ProjectManagement.Api).
+2025-08-31 10:50:20.185 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-08-31 10:50:20.203 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-08-31 10:50:20.204 +02:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-08-31 10:50:20.204 +02:00 [INF] Executed action ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api) in 51.083ms
+2025-08-31 10:50:20.204 +02:00 [INF] Executed endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:20.204 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5241/api/Auth/login - 401 null text/plain; charset=utf-8 54.3355ms
+2025-08-31 10:50:40.034 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5241/api/Auth/login - application/json 64
+2025-08-31 10:50:40.037 +02:00 [INF] Executing endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:40.038 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ProjectManagement.Api.Features.Auth.DTO.LoginRequestDto) on controller ProjectManagement.Api.Features.Auth.AuthController (ProjectManagement.Api).
+2025-08-31 10:50:40.105 +02:00 [INF] Executed DbCommand (42ms) [Parameters=[@__normalizedEmail_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(2) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedEmail] = @__normalizedEmail_0
+2025-08-31 10:50:40.112 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmed], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-08-31 10:50:40.113 +02:00 [INF] Executing UnauthorizedObjectResult, writing value of type 'System.String'.
+2025-08-31 10:50:40.114 +02:00 [INF] Executed action ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api) in 75.9755ms
+2025-08-31 10:50:40.114 +02:00 [INF] Executed endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:50:40.114 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5241/api/Auth/login - 401 null text/plain; charset=utf-8 80.6966ms
+2025-08-31 10:52:36.937 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5241/api/Auth/register - application/json 64
+2025-08-31 10:52:36.939 +02:00 [INF] Executing endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Register (ProjectManagement.Api)'
+2025-08-31 10:52:36.944 +02:00 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ProjectManagement.Api.Features.Auth.DTO.RegisterRequestDto) on controller ProjectManagement.Api.Features.Auth.AuthController (ProjectManagement.Api).
+2025-08-31 10:52:36.948 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-08-31 10:52:36.973 +02:00 [INF] Executed action ProjectManagement.Api.Features.Auth.AuthController.Register (ProjectManagement.Api) in 29.254ms
+2025-08-31 10:52:36.973 +02:00 [INF] Executed endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Register (ProjectManagement.Api)'
+2025-08-31 10:52:36.973 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5241/api/Auth/register - 400 null application/problem+json; charset=utf-8 37.106ms
+2025-08-31 10:53:06.190 +02:00 [INF] Application is shutting down...
+2025-08-31 10:53:14.166 +02:00 [INF] User profile is available. Using '/Users/mahdiisse/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-08-31 10:53:14.221 +02:00 [INF] Now listening on: http://localhost:5241
+2025-08-31 10:53:14.222 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-08-31 10:53:14.222 +02:00 [INF] Hosting environment: Development
+2025-08-31 10:53:14.222 +02:00 [INF] Content root path: /Users/mahdiisse/project-management-backend/ProjectManagement.Api
+2025-08-31 10:53:15.909 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5241/swagger/index.html - null null
+2025-08-31 10:53:15.975 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5241/swagger/index.html - 200 null text/html;charset=utf-8 66.4835ms
+2025-08-31 10:53:16.237 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5241/swagger/v1/swagger.json - null null
+2025-08-31 10:53:16.299 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5241/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 61.6449ms
+2025-08-31 10:53:20.584 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5241/api/Auth/login - application/json 64
+2025-08-31 10:53:20.592 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-08-31 10:53:20.622 +02:00 [INF] Executing endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:53:20.635 +02:00 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ProjectManagement.Api.Features.Auth.DTO.LoginRequestDto) on controller ProjectManagement.Api.Features.Auth.AuthController (ProjectManagement.Api).
+2025-08-31 10:53:20.734 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-08-31 10:53:20.747 +02:00 [INF] Executed action ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api) in 111.3936ms
+2025-08-31 10:53:20.748 +02:00 [INF] Executed endpoint 'ProjectManagement.Api.Features.Auth.AuthController.Login (ProjectManagement.Api)'
+2025-08-31 10:53:20.748 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5241/api/Auth/login - 400 null application/problem+json; charset=utf-8 164.4944ms
+2025-08-31 12:01:55.759 +02:00 [INF] Application is shutting down...
+ '/Users/mahdiisse/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-08-31 12:01:51.563 +02:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:5241: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Address already in use
+ ---> System.Net.Sockets.SocketException (48): Address already in use
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
